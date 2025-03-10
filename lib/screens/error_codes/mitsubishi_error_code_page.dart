@@ -4,6 +4,12 @@ import '../home_page.dart';
 class MitsubishiErrorCodePage extends StatefulWidget {
   const MitsubishiErrorCodePage({Key? key}) : super(key: key);
 
+  static const String PROBLEM_LABEL = 'ปัญหา: ';
+  static const String STATUS_LABEL = 'สถานะการทำงาน: ';
+  static const String CONTROL_LABEL = 'จุดสังเกต: ';
+  static const String SOLUTION_LABEL = 'วิธีแก้ไข: ';
+  static const String Errorss = 'Error';
+
   @override
   State<MitsubishiErrorCodePage> createState() => _MitsubishiErrorCodePageState();
 }
@@ -11,159 +17,112 @@ class MitsubishiErrorCodePage extends StatefulWidget {
 class _MitsubishiErrorCodePageState extends State<MitsubishiErrorCodePage> {
   String searchQuery = '';
   String selectedGroup = '';
-
-  // กำหนดกลุ่มข้อมูล Mitsubishi
-  final Map<String, List<Map<String, String>>> errorGroups = {
-    "ระบบแผงวงจร": [
+  
+  final Map<String, List<Map<String, dynamic>>> errorGroups = {
+      'ปัญหาเกี่ยวกับเซ็นเซอร์': [
       {
         "code": "E1",
-        "problem": "แผงวงจรรีโมทคอนโทรลผิดปกติ",
-        "status": "ระบบแอร์หยุดการทำงาน",
-        "control": "สังเกตที่รีโมทคอนโทรล"
+        "LED_blink": "ไฟ OPERATION กระพริบ 1 ครั้ง",
+        "LED_out": "กะพริบ 1 ครั้ง ทุก 2 วินาที",
+        "problem": "เซ็นเซอร์อุณหภูมิห้องเสียหาย",
+        "test": "เมื่อหยุดเครื่อง ไฟ OPERATION กระพริบ"
       },
       {
         "code": "E2",
-        "problem": "แผงวงจรหลักผิดปกติ",
-        "status": "ระบบแอร์หยุดการทำงาน",
-        "control": "สังเกตที่บอร์ดควบคุมหลัก"
+        "LED_blink": "ไฟ OPERATION กระพริบ 2 ครั้ง",
+        "LED_out": "กะพริบ 2 ครั้ง ทุก 3 วินาที", 
+        "problem": "เซ็นเซอร์แลกเปลี่ยนความร้อนเสียหาย",
+        "test": "เมื่อหยุดเครื่อง ไฟ OPERATION กระพริบ"
       },
       {
         "code": "E3",
-        "problem": "การสื่อสารระหว่างรีโมทคอนโทรลและตัวในห้องมีปัญหา",
-        "status": "ระบบแอร์หยุดการทำงาน",
-        "control": "ตรวจสอบการส่งสัญญาณระหว่างรีโมทและเครื่อง"
-      },
-      {
-        "code": "E4",
-        "problem": "การสื่อสารระหว่างตัวในห้องและตัวนอกห้องมีปัญหา",
-        "status": "ระบบแอร์หยุดการทำงาน",
-        "control": "ตรวจสอบการเชื่อมต่อระหว่างเครื่องใน/นอก"
-      },
-      {
-        "code": "E5",
-        "problem": "แรงดันไฟฟ้าผิดปกติ",
-        "status": "ระบบแอร์หยุดการทำงาน",
-        "control": "ตรวจสอบแรงดันไฟฟ้าขาเข้า"
+        "LED_blink": "ไฟ OPERATION กระพริบ 3 ครั้ง",
+        "LED_out": "กะพริบ 3 ครั้ง ทุก 3 วินาที",
+        "problem": "เซ็นเซอร์ท่อคอนเดนเซอร์เสียหาย",
+        "test": "เมื่อหยุดเครื่อง ไฟ OPERATION กระพริบ"
       }
     ],
-    "เซนเซอร์": [
+    'อาการเสียเครื่องตัวในบ้าน': [
       {
-        "code": "E6",
-        "problem": "เซนเซอร์อุณหภูมิตัวในห้องผิดปกติ",
-        "status": "ระบบแอร์หยุดการทำงาน",
-        "control": "ตรวจสอบเซนเซอร์วัดอุณหภูมิห้อง"
+        "code": "00",
+        "problem": "ไม่มี (ปกติ)"
       },
       {
-        "code": "E7",
-        "problem": "เซนเซอร์อุณหภูมิคอยล์เย็นผิดปกติ",
-        "status": "ระบบแอร์หยุดการทำงาน",
-        "control": "ตรวจสอบเซนเซอร์แผงคอยล์เย็น"
+        "code": "E6 E7",
+        "problem": "สัญญาณแบบอนุกรม"
+      },
+        {
+        "code": "Fb",
+        "problem": "ระบบควบคุมเครื่องภายในบ้าน"
+      },
+         {
+        "code": "P1",
+        "problem": "เทอร์มิสเตอร์อุณหภูมิห้อง"
+      },
+          {
+        "code": "P2 P9",
+        "problem": "คออส์เทอร์มิสเตอร์ของเครื่องภายในบ้าน"
+      },
+        {
+        "code": "PB",
+        "problem": "มอเตอร์พัดลมของเครื่องภายในบ้าน"
+      },
+       {
+        "code": "E8 E9 EC",
+        "problem": "การสื่อสารระหว่างเครื่องภายในบ้านเครื่องภายนอกบ้าน,การรับสัญญาณขัดข้อง"
+      },
+       {
+        "code": "FC",
+        "problem": "ข้อมูลหน่วยความจำถาวร"
+      },
+       {
+        "code": "Fd",
+        "problem": "แรงตันไฟฟ้าไม่ถูกต้อง"
       },
       {
-        "code": "E8",
-        "problem": "เซนเซอร์อุณหภูมิตัวนอกห้องผิดปกติ",
-        "status": "ระบบแอร์หยุดการทำงาน",
-        "control": "ตรวจสอบเซนเซอร์อุณหภูมิภายนอก"
+        "code": "P8",
+        "problem": "อุณหภูมิวาล์ว 4 ทางท่อ"
+      },
+       {
+        "code": "PL",
+        "problem": "ระบบสารทำความเย็นของเครื่องภายนอกบ้าน"
+      },
+       {
+        "code": "U3",
+        "problem": "Discharge เทอร์มิสเตอร์"
+      },
+        {
+        "code": "U4",
+        "problem": "เทอร์มิสเตอร์การละลายน้ำแข็ง \n ทอร์มิสเตอร์คุณหภูมิตรีบ \n เทอร์มิสเตอร์อุณหภูมิแผ่นวงจะควบคุมอิเล็กทรอนิกส์ \n เทอร์มิสเตอร์คุณหภูมิแวดล้อม \n เทอร์มิสเตอร์อุณหภูมิเครื่องแลกเปลี่ยนความร้อนของเครื่องภายนอกบ้าน"
+        
       },
       {
-        "code": "E9",
-        "problem": "เซนเซอร์อุณหภูมิคอยล์ร้อนผิดปกติ",
-        "status": "ระบบแอร์หยุดการทำงาน",
-        "control": "ตรวจสอบเซนเซอร์แผงคอยล์ร้อน"
+        "code": "UE",
+        "problem": "ราตัวเปิด-ปิด (วาล์วปิด)"
       },
       {
-        "code": "EA",
-        "problem": "เซนเซอร์อุณหภูมิท่อดิสชาร์จผิดปกติ",
-        "status": "ระบบแอร์หยุดการทำงาน",
-        "control": "ตรวจสอบเซนเซอร์ท่อทางออกคอมเพรสเซอร์"
+        "code": "UP",
+        "problem": "ระบบไฟฟ้าของเครื่องภายนอกบ้าน"
       }
+     
     ],
-    "ระบบมอเตอร์": [
-      {
-        "code": "EE",
-        "problem": "มอเตอร์พัดลมตัวในห้องทำงานผิดปกติ",
-        "status": "ระบบแอร์หยุดการทำงาน",
-        "control": "ตรวจสอบมอเตอร์และพัดลมคอยล์เย็น"
-      },
-      {
-        "code": "EF",
-        "problem": "มอเตอร์พัดลมตัวนอกห้องทำงานผิดปกติ",
-        "status": "ระบบแอร์หยุดการทำงาน",
-        "control": "ตรวจสอบมอเตอร์และพัดลมคอยล์ร้อน"
-      }
-    ],
-    "ระบบป้องกัน": [
-      {
-        "code": "F1",
-        "problem": "ความดันสูงผิดปกติ",
-        "status": "ระบบแอร์หยุดการทำงาน/ทำงานต่อหลังแก้ไข",
-        "control": "ตรวจสอบความดันของระบบ"
-      },
-      {
-        "code": "F3",
-        "problem": "อุณหภูมิคอมเพรสเซอร์สูงเกินไป",
-        "status": "ระบบแอร์หยุดการทำงาน/ทำงานต่อหลังแก้ไข",
-        "control": "ตรวจสอบอุณหภูมิที่คอมเพรสเซอร์"
-      },
-      {
-        "code": "F4",
-        "problem": "คอมเพรสเซอร์ทำงานผิดปกติ",
-        "status": "ระบบแอร์หยุดการทำงาน",
-        "control": "ตรวจสอบการทำงานของคอมเพรสเซอร์"
-      },
-      {
-        "code": "F5",
-        "problem": "กระแสไฟฟ้าเกินกำหนด",
-        "status": "ระบบแอร์หยุดการทำงาน",
-        "control": "ตรวจสอบกำลังไฟฟ้าที่ใช้"
-      },
-      {
-        "code": "F6",
-        "problem": "IPM (Intelligent Power Module) ผิดปกติ",
-        "status": "ระบบแอร์หยุดการทำงาน",
-        "control": "ตรวจสอบโมดูลแปลงกำลังไฟฟ้า"
-      },
-      {
-        "code": "F8",
-        "problem": "PFC (Power Factor Correction) ผิดปกติ",
-        "status": "ระบบแอร์หยุดการทำงาน",
-        "control": "ตรวจสอบวงจรแก้ไขค่าตัวประกอบกำลัง"
-      }
-    ]
   };
 
-  // เพิ่มฟังก์ชันหาชื่อกลุ่มจาก error code
-  String getGroupNameForError(String errorCode) {
-    for (var entry in errorGroups.entries) {
-      if (entry.value.any((error) => error['code'] == errorCode)) {
-        return entry.key;
-      }
+  List<Map<String, dynamic>> get filteredErrors {
+    if (selectedGroup.isEmpty && searchQuery.isEmpty) {
+      return errorGroups.values.expand((errors) => errors).toList();
     }
-    return '';
-  }
-
-  List<Map<String, String>> _getFilteredErrors() {
-    List<Map<String, String>> filteredList = [];
+    var errors = selectedGroup.isEmpty
+        ? errorGroups.values.expand((errors) => errors).toList()
+        : errorGroups[selectedGroup] ?? [];
     
-    if (selectedGroup.isEmpty) {
-      // ถ้าไม่ได้เลือกกลุ่ม ให้แสดงทั้งหมด
-      filteredList = errorGroups.values.expand((group) => group).toList();
-    } else {
-      // แสดงเฉพาะกลุ่มที่เลือก
-      filteredList = errorGroups[selectedGroup] ?? [];
-    }
-
-    // กรองตามคำค้นหา
-    if (searchQuery.isNotEmpty) {
-      filteredList = filteredList.where((error) {
-        return error['code']!.toLowerCase().contains(searchQuery.toLowerCase()) ||
-               error['problem']!.toLowerCase().contains(searchQuery.toLowerCase()) ||
-               (error['status'] != null && error['status']!.toLowerCase().contains(searchQuery.toLowerCase())) ||
-               (error['control'] != null && error['control']!.toLowerCase().contains(searchQuery.toLowerCase()));
-      }).toList();
-    }
-
-    return filteredList;
+    if (searchQuery.isEmpty) return errors;
+    
+    return errors.where((error) {
+      final searchLower = searchQuery.toLowerCase();
+      return error['code'].toString().toLowerCase().contains(searchLower) ||
+             error['problem'].toString().toLowerCase().contains(searchLower);
+    }).toList();
   }
 
   @override
@@ -171,29 +130,29 @@ class _MitsubishiErrorCodePageState extends State<MitsubishiErrorCodePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('MITSUBISHI Error Codes'),
-        backgroundColor: MyHomePage.appBarColor,
+        backgroundColor: MyHomePage.appBarColor, // Use the static appBarColor
       ),
       body: Column(
         children: [
-          // ช่องค้นหา
+          // Search Bar
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
-              decoration: InputDecoration(
-                hintText: 'ค้นหารหัสข้อผิดพลาดหรือปัญหา...',
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
               onChanged: (value) {
                 setState(() {
                   searchQuery = value;
                 });
               },
+              decoration: InputDecoration(
+                labelText: 'ค้นหารหัสข้อผิดพลาด',
+                prefixIcon: const Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
             ),
           ),
-          // แถบเลือกกลุ่ม
+          // Filter Chips
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
@@ -220,87 +179,107 @@ class _MitsubishiErrorCodePageState extends State<MitsubishiErrorCodePage> {
                             selectedGroup = selected ? group : '';
                           });
                         },
-                      )),
+                      )).toList(),
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          // แสดงรายการ Error Codes
+          // Error List
           Expanded(
             child: ListView.builder(
-              itemCount: _getFilteredErrors().length,
+              itemCount: filteredErrors.length,
               itemBuilder: (context, index) {
-                final error = _getFilteredErrors()[index];
-                final groupName = getGroupNameForError(error['code']!);
-                
+                final error = filteredErrors[index];
                 return Card(
                   margin: const EdgeInsets.all(8),
                   color: MyHomePage.cardBackgroundColor,
-                  child: ExpansionTile(
-                    title: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Text.rich(
-                            TextSpan(
-                              children: [
-                                const TextSpan(
-                                  text: 'Error: ',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: '${error['code']}',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: MyHomePage.textColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 2,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.blue.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Text(
-                            groupName,
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.blue[700],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    subtitle: Column(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text.rich(
-                          TextSpan(
+                        RichText(
+                          text: TextSpan(
                             children: [
-                              const TextSpan(
-                                text: 'ปัญหา: ',
-                                style: TextStyle(
+                              TextSpan(
+                                text: MitsubishiErrorCodePage.Errorss,
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14,
+                                  color: Colors.black,
                                 ),
                               ),
                               TextSpan(
-                                text: error['problem'],
+                                text: ' ${error['code']}',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: MyHomePage.textColor, // Update to use static textColor
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: MitsubishiErrorCodePage.STATUS_LABEL,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '${error['LED_out']}',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.orange,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: MitsubishiErrorCodePage.CONTROL_LABEL,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '${error['LED_blink']}',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: MitsubishiErrorCodePage.PROBLEM_LABEL,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '${error['problem']}',
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: MyHomePage.textColor,
@@ -309,125 +288,30 @@ class _MitsubishiErrorCodePageState extends State<MitsubishiErrorCodePage> {
                             ],
                           ),
                         ),
-                        if (error['status'] != null) ...[
-                          const SizedBox(height: 4),
-                          Text.rich(
-                            TextSpan(
-                              children: [
-                                const TextSpan(
-                                  text: 'สถานะการทำงาน: ',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
-                                  ),
+                        const SizedBox(height: 8),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: MitsubishiErrorCodePage.SOLUTION_LABEL,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  color: Colors.black,
                                 ),
-                                TextSpan(
-                                  text: error['status'],
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    color: MyHomePage.textColor,
-                                  ),
+                              ),
+                              TextSpan(
+                                text: '${error['test']}',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: MyHomePage.textColor, // Update to use static textColor
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ],
                     ),
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (error['control'] != null) ...[
-                              Text.rich(
-                                TextSpan(
-                                  children: [
-                                    const TextSpan(
-                                      text: 'จุดสังเกต: ',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: error['control'],
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: MyHomePage.textColor,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                            ],
-                            Text(
-                              'วิธีแก้ไข:',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: MyHomePage.textColor,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            if (error['code']!.startsWith('E1') || error['code']!.startsWith('E2') || error['code']!.startsWith('E3') || error['code']!.startsWith('E4') || error['code']!.startsWith('E5')) 
-                              Text(
-                                '1. ตรวจสอบการเชื่อมต่อของสายไฟระหว่างชุดควบคุม\n'
-                                '2. ตรวจวัดแรงดันไฟฟ้าที่จ่ายให้ระบบ\n'
-                                '3. ตรวจสอบแผงวงจรที่เกี่ยวข้อง\n'
-                                '4. เปลี่ยนอุปกรณ์ที่มีปัญหา',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyHomePage.textColor,
-                                ),
-                              )
-                            else if (error['code']!.startsWith('E6') || error['code']!.startsWith('E7') || error['code']!.startsWith('E8') || error['code']!.startsWith('E9') || error['code']!.startsWith('EA'))
-                              Text(
-                                '1. ตรวจสอบการเชื่อมต่อของเซนเซอร์\n'
-                                '2. วัดค่าความต้านทานของเซนเซอร์\n'
-                                '3. ตรวจสอบสายไฟและขั้วต่อ\n'
-                                '4. เปลี่ยนเซนเซอร์ถ้าจำเป็น',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyHomePage.textColor,
-                                ),
-                              )
-                            else if (error['code']!.startsWith('EE') || error['code']!.startsWith('EF'))
-                              Text(
-                                '1. ตรวจสอบการหมุนของพัดลม\n'
-                                '2. ตรวจสอบแรงดันไฟฟ้าที่จ่ายให้มอเตอร์\n'
-                                '3. ตรวจสอบขดลวดของมอเตอร์\n'
-                                '4. เปลี่ยนมอเตอร์หรือพัดลมถ้าจำเป็น',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyHomePage.textColor,
-                                ),
-                              )
-                            else if (error['code']!.startsWith('F'))
-                              Text(
-                                '1. ตรวจสอบความดันของระบบทำความเย็น\n'
-                                '2. ตรวจสอบการทำงานของคอมเพรสเซอร์\n'
-                                '3. ตรวจสอบสารทำความเย็นในระบบ\n'
-                                '4. ตรวจสอบแผงวงจรที่เกี่ยวข้อง',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyHomePage.textColor,
-                                ),
-                              )
-                            else 
-                              Text(
-                                'กรุณาติดต่อช่างผู้เชี่ยวชาญหรือศูนย์บริการ Mitsubishi ใกล้บ้านคุณ',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyHomePage.textColor,
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                    ],
                   ),
                 );
               },

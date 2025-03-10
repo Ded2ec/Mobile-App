@@ -351,7 +351,7 @@ class _TclErrorCodePageState extends State<TclErrorCodePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'คำแนะนำในการแก้ไข:',
+                              'วิธีแก้ไข:',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,

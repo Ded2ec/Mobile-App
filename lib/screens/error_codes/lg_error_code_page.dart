@@ -12,122 +12,146 @@ class _LGErrorCodePageState extends State<LGErrorCodePage> {
   String searchQuery = '';
   String selectedGroup = '';
 
-  // กำหนดกลุ่มข้อมูล LG
+  // กำหนดกลุ่มข้อมูล
   final Map<String, List<Map<String, String>>> errorGroups = {
-    "เซนเซอร์และการเชื่อมต่อ": [
-      {
-        "code": "CH01",
-        "problem": "เซนเซอร์วัดอุณหภูมิห้องผิดปกติ"
-      },
-      {
-        "code": "CH02",
-        "problem": "เซนเซอร์วัดอุณหภูมิ Indoor coil ผิดปกติ"
-      },
-      {
-        "code": "CH06",
-        "problem": "เซนเซอร์วัดอุณหภูมิ Outdoor coil ผิดปกติ"
-      },
-      {
-        "code": "CH09",
-        "problem": "EEPROM ผิดพลาด"
-      },
-      {
-        "code": "CH10",
-        "problem": "พัดลมคอยล์เย็นทำงานผิดปกติ"
-      },
-      {
-        "code": "CH21",
-        "problem": "DC ลิงค์ไฟฟ้าสูงเกินไป"
-      },
-      {
-        "code": "CH22",
-        "problem": "DC ลิงค์ไฟฟ้าต่ำเกินไป"
-      },
-      {
-        "code": "CH23",
-        "problem": "ความดันก๊าซต่ำ"
-      },
-      {
-        "code": "CH26",
-        "problem": "คอมเพรสเซอร์เริ่มทำงานผิดปกติ"
-      },
-      {
-        "code": "CH27",
-        "problem": "คอมเพรสเซอร์ล็อค/ติดขัด"
-      },
-      {
-        "code": "CH32",
-        "problem": "อุณหภูมิท่อ Discharge สูงเกินไป"
-      }
+    'โค้ดแสดงความผิดปกติของคอยล์เป็น': [
+     {
+    "code": "1",
+    "problem": "เซ็นเซอร์อุณหภูมิห้องเสีย"
+  },
+  {
+    "code": "2",
+    "problem": "เซ็นเซอร์อุณหภูมิท่อคอยล์เย็นขาเข้าเสีย"
+  },
+  {
+    "code": "3",
+    "problem": "รีโมทแบบสายมีปัญหา"
+  },
+  {
+    "code": "4",
+    "problem": "ไฟเวอร์ไดร์เสีย(ลอคฟัน)"
+  },
+  {
+    "code": "5",
+    "problem": "การสื่อสัญญาณระหว่างคอยล์เย็น-คอยล์ร้อนมีปัญหา"
+  },
+  {
+    "code": "6",
+    "problem": "เซ็นเซอร์อุณหภูมิท่อคอยล์เย็นขาออกเสีย"
+  },
+  {
+    "code": "9",
+    "problem": "EEPROM มีปัญหา(หน่วยความจำคอยล์เย็นเสีย)"
+  },
+  {
+    "code": "10",
+    "problem": "มอเตอร์พัดลมเย็น ล็อค/ไม่หมุน"
+  },
+  {
+    "code": "12",
+    "problem": "เซ็นเซอร์อุณหภูมิท่อคอยล์เย็น(กลางแลกเปลี่ยนเย็น) เสีย"
+  },
     ],
-    "การสื่อสารและควบคุม": [
+    'โค้ดแสดงความผิดปกติของคอยดร้อน': [
       {
-        "code": "CH05",
-        "problem": "การสื่อสารระหว่างคอยล์เย็นและคอยล์ร้อนผิดปกติ"
-      },
-      {
-        "code": "CH12",
-        "problem": "การสื่อสารกับรีโมทควบคุมผิดปกติ"
-      },
-      {
-        "code": "CH52",
-        "problem": "การติดต่อสื่อสารของแผงวงจรมีปัญหา"
-      },
-      {
-        "code": "CH53",
-        "problem": "การตั้งค่าความเร็วรอบของคอมเพรสเซอร์ผิดปกติ"
-      },
-      {
-        "code": "CH60",
-        "problem": "ข้อมูล EEPROM ผิดพลาด"
-      },
-      {
-        "code": "CH61",
-        "problem": "อุณหภูมิ Condenser สูงเกินไป"
-      },
-      {
-        "code": "CH62",
-        "problem": "อุณหภูมิ Heat sink สูงเกินไป"
-      },
-      {
-        "code": "CH67",
-        "problem": "มอเตอร์พัดลมคอยล์ร้อนผิดปกติ"
-      }
+    "code": "21",
+    "problem": "แรงดันไฟ DC /ไฟ แรงดันไฟต่ำมากเกินไป(IPM เสีย/ มีปัญหา)"
+  },
+  {
+    "code": "22",
+    "problem": "กระแสค่าไฟสูงวงจร(CT 2 ไอเวอร์ไดรฟ์)"
+  },
+  {
+    "code": "23",
+    "problem": "แรงดันไฟ DC Link ค่าต่ำผิดปกติ(ไฟฟ้าขาเข้าอาจไม่เพียงพอ)"
+  },
+  {
+    "code": "26",
+    "problem": "แรงดันไฟ DC Comp มีปัญหา"
+  },
+  {
+    "code": "27",
+    "problem": "PSC มีปัญหา"
+  },
+  {
+    "code": "29",
+    "problem": "กระแสคอมเพรสเซอร์ในแต่ละเฟสผิดปกติ(สายหลุด/หลวม/สายขาด)"
+  },
     ],
-    "การป้องกันและความปลอดภัย": [
+    'โค้ดแสดงความผิดปกติของคอยล์ร้อน': [
       {
-        "code": "CH29",
-        "problem": "กระแสไฟฟ้าเฟสของคอมเพรสเซอร์เกิน"
-      },
-      {
-        "code": "CH31",
-        "problem": "แรงดันไฟฟ้าเกินค่าที่กำหนด"
-      },
-      {
-        "code": "CH40",
-        "problem": "แรงดันไฟฟ้าไม่เพียงพอหรือเกิน"
-      },
-      {
-        "code": "CH41",
-        "problem": "อุณหภูมิในหรือนอกอาคารไม่อยู่ในช่วงการทำงาน"
-      },
-      {
-        "code": "CH44",
-        "problem": "เซนเซอร์อุณหภูมิท่อกลับลมมีปัญหา"
-      },
-      {
-        "code": "CH45",
-        "problem": "เซนเซอร์อุณหภูมิท่อจ่ายลมมีปัญหา"
-      },
-      {
-        "code": "CH46",
-        "problem": "เซนเซอร์ความดันต่ำมีปัญหา"
-      },
-      {
-        "code": "CH51",
-        "problem": "ความจุเครื่องไม่ตรงกัน"
-      }
-    ]
+    "code": "32",
+    "problem": "อุณหภูมิท่อคอยล์แคนเดนเซอร์ (หลายๆค่า) สูงเกินไป"
+  },
+  {
+    "code": "34",
+    "problem": "เซ็นเซอร์High Pressure จับแรงดันได้สูงเกินไป"
+  },
+  {
+    "code": "35",
+    "problem": "เซ็นเซอร์Low Pressure จับแรงดันได้ต่ำเกินไป"
+  },
+  {
+    "code": "36(38)",
+    "problem": "น้ำแข็งจับ"
+  },
+  {
+    "code": "37",
+    "problem": "อัตราส่วนการอัดอากาศต่างๆผิดปกติ"
+  },
+  {
+    "code": "40",
+    "problem": "เซ็นเซอร์วัดระบบแรงดัน (CT) มีปัญหา"
+  },
+  {
+    "code": "41",
+    "problem": "เซ็นเซอร์วัดอุณหภูมิปล่อยลมร้อน (หลายๆค่า) มีปัญหา"
+  },
+  {
+    "code": "42",
+    "problem": "เซ็นเซอร์Low Pressure เสีย/ มีปัญหา"
+  },
+  {
+    "code": "43",
+    "problem": "เซ็นเซอร์High Pressure เสีย/ มีปัญหา"
+  },
+  {
+    "code": "44",
+    "problem": "เซ็นเซอร์อุณหภูมิอุณหภูมิเสีย (อุณหภูมิอากาศภายนอกห้อง)"
+  },
+  {
+    "code": "45",
+    "problem": "เซ็นเซอร์อุณหภูมิท่อไม่ปล่อยลมร้อน (คอลเลค) มีปัญหา"
+  },
+  {
+    "code": "46",
+    "problem": "เซ็นเซอร์ท่อดูดมีปัญหา(Suction-Pipe Sensor Error)"
+  },
+  {
+    "code": "51",
+    "problem": "ขาดแรงลมที่ดูดเจอลมเย็นและเกิดลมรั่ว(ไม่ตรงกับแผนที่ไม่สมดุล)"
+  },
+  {
+    "code": "53",
+    "problem": "การสื่อสัญญาณระหว่างคอยล์เย็น-คอยล์ร้อน มีปัญหา"
+  },
+  {
+    "code": "61",
+    "problem": "อุณหภูมิเย็นและท่อไอน้ำแบบเซอร์มิสเตอร์"
+  },
+  {
+    "code": "62",
+    "problem": "Heat Sink ร้อนเกิน(อุณหาจะร้อนไม่แลกเปลี่ยนกับ IPM)"
+  },
+  {
+    "code": "67",
+    "problem": "DC Motor คอยล์ร้อนมีปัญหา(สายขาด/ หลวม/ มอเตอร์เสีย)"
+  },
+  {
+    "code": "72",
+    "problem": "วาวส์4 Way มีปัญหาหลุด/หลวม/ เสีย"
+  }
+    ],
   };
 
   // เพิ่มฟังก์ชันหาชื่อกลุ่มจาก error code
@@ -167,7 +191,7 @@ class _LGErrorCodePageState extends State<LGErrorCodePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('LG Error Codes'),
-        backgroundColor: MyHomePage.appBarColor,
+        backgroundColor: MyHomePage.appBarColor, // Use the static appBarColor
       ),
       body: Column(
         children: [
@@ -234,7 +258,7 @@ class _LGErrorCodePageState extends State<LGErrorCodePage> {
                 return Card(
                   margin: const EdgeInsets.all(8),
                   color: MyHomePage.cardBackgroundColor,
-                  child: ExpansionTile(
+                  child: ListTile(
                     title: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -269,27 +293,29 @@ class _LGErrorCodePageState extends State<LGErrorCodePage> {
                             vertical: 2,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.blue.withOpacity(0.1),
+                              color: Colors.blue.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
                             groupName,
-                            style: TextStyle(
+                  style: TextStyle(
                               fontSize: 12,
                               color: Colors.blue[700],
+                                  fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
                       ],
                     ),
-                    subtitle: Text.rich(
+                   subtitle: Text.rich(
                       TextSpan(
                         children: [
-                          const TextSpan(
+                          TextSpan(
                             text: 'ปัญหา: ',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
+                              color: MyHomePage.textColor,
                             ),
                           ),
                           TextSpan(
@@ -302,67 +328,6 @@ class _LGErrorCodePageState extends State<LGErrorCodePage> {
                         ],
                       ),
                     ),
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'คำแนะนำในการแก้ไข:',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: MyHomePage.textColor,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            if (error['code']!.startsWith('CH0') || error['code']!.startsWith('CH1') || error['code']!.startsWith('CH2')) 
-                              Text(
-                                '1. ตรวจสอบการเชื่อมต่อของเซนเซอร์และสายไฟ\n'
-                                '2. ตรวจสอบค่าความต้านทานของเซนเซอร์\n'
-                                '3. ตรวจสอบแผงวงจรควบคุม\n'
-                                '4. เปลี่ยนเซนเซอร์หรือแผงวงจรที่มีปัญหา',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyHomePage.textColor,
-                                ),
-                              )
-                            else if (error['code']!.startsWith('CH3') || error['code']!.startsWith('CH4'))
-                              Text(
-                                '1. ตรวจสอบแรงดันไฟฟ้าที่จ่ายให้เครื่อง\n'
-                                '2. ตรวจสอบการทำงานของระบบป้องกัน\n'
-                                '3. ตรวจสอบความดันของระบบทำความเย็น\n'
-                                '4. ตรวจสอบการทำงานของคอมเพรสเซอร์',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyHomePage.textColor,
-                                ),
-                              )
-                            else if (error['code']!.startsWith('CH5') || error['code']!.startsWith('CH6'))
-                              Text(
-                                '1. ตรวจสอบการเชื่อมต่อสายสัญญาณระหว่างคอยล์เย็นและคอยล์ร้อน\n'
-                                '2. ตรวจสอบแรงดันไฟฟ้าที่จ่ายให้ระบบ\n'
-                                '3. ตรวจสอบการทำงานของแผงวงจรควบคุม\n'
-                                '4. ตรวจสอบซอฟต์แวร์และการตั้งค่าระบบ',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyHomePage.textColor,
-                                ),
-                              )
-                            else 
-                              Text(
-                                'ปฏิบัติตามคำแนะนำในคู่มือการซ่อมบำรุงของ LG หรือติดต่อช่างผู้เชี่ยวชาญ\n'
-                                'สำหรับรหัสข้อผิดพลาดที่ไม่มีข้อมูลโดยละเอียด',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyHomePage.textColor,
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                    ],
                   ),
                 );
               },
